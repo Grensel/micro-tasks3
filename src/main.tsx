@@ -6,7 +6,7 @@ import { StrictMode } from "react";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode >
-    <HashRouter basename="micro-tasks3">
+    <HashRouter>
       <App />
     </HashRouter>
   </StrictMode>
