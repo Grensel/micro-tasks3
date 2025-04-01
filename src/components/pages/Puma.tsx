@@ -42,7 +42,7 @@ const picture = pumaArr.map((m, index) => (
     </Link>
 ))
 
-export const PageTwo = () => {
+export const Puma = () => {
     return (
         <div>
             <h2>PUMA</h2>

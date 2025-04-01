@@ -37,15 +37,28 @@ export const Prices = (props: Props) => {
         }
     ];
 
+    const [searchParams, setSeatchParams] = useSearchParams()
+    console.log(searchParams.get('onSale'));
+
+
     const [filteredSneakers, setFilteredSneakers] = useState(sneakers);
 
     function handleOnSale() {
-
+        setSeatchParams({ onSale: "true" })
     }
 
     function handleReset() {
-
+        setSeatchParams({})
     }
+
+    useEffect(
+        () => {
+            if (searchParams.get('onSale') === "true") {
+                setFilteredSneakers(sneakers.filter(sneakers => sneakers.onSale))
+            } else {
+                setFilteredSneakers(sneakers)
+            }
+        }, [searchParams])
 
 
     return (
@@ -55,22 +68,22 @@ export const Prices = (props: Props) => {
 
             <table className={styles.tableStyle}>
                 <thead>
-                <tr>
-                    <th className={styles.thStyle}>Manufacturer</th>
-                    <th className={styles.thStyle}>Name</th>
-                    <th className={styles.thStyle}>Price</th>
-                    <th className={styles.thStyle}>On Sale</th>
-                </tr>
+                    <tr>
+                        <th className={styles.thStyle}>Manufacturer</th>
+                        <th className={styles.thStyle}>Name</th>
+                        <th className={styles.thStyle}>Price</th>
+                        <th className={styles.thStyle}>On Sale</th>
+                    </tr>
                 </thead>
                 <tbody>
-                {filteredSneakers.map((sneaker, index) => (
-                    <tr key={index}>
-                        <td className={styles.tdStyle}>{sneaker.manufacturer}</td>
-                        <td className={styles.tdStyle}>{sneaker.name}</td>
-                        <td className={styles.tdStyle}>${sneaker.price}</td>
-                        <td className={styles.tdStyle}>{sneaker.onSale ? 'Yes' : 'No'}</td>
-                    </tr>
-                ))}
+                    {filteredSneakers.map((sneaker, index) => (
+                        <tr key={index}>
+                            <td className={styles.tdStyle}>{sneaker.manufacturer}</td>
+                            <td className={styles.tdStyle}>{sneaker.name}</td>
+                            <td className={styles.tdStyle}>${sneaker.price}</td>
+                            <td className={styles.tdStyle}>{sneaker.onSale ? 'Yes' : 'No'}</td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>
